@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progamação Web - Formulario</title>
+    <link rel="stylesheet" href="CSS\stylos.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;1,100&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header-index">
+
+        <div class="titulo-nav">
+            <a  href="index.html">MinhaWeb.com</a>
+        </div>
+
+        <nav class="menu-index">
+            <div class="icones-nav">
+                <a class="home-nav"href="index.html">Home</a>
+                <a class="form-nav"href="form.html">Formulário</a>
+                <a class="about-nav"href="about.html">Sobre</a>
+            </div> 
+        </nav>
+
+    </header>
+
+    <main class="conteudo-form">
+
+        <div class="container">
+
+            <div class="titulo-container">
+                <h2>Formulário</h2>
+            </div>
+            <form method="GET" action="formAbout.html" >
+                <section class="dados-pessoais">
+                    <div class="input">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" name="nome" id="nome" placeholder="Digite seu nome" required pattern="[A-Za-záàâãéèêíóôõúç\s]{8,50}" title="Nome deve conter de 8 a 50 letras">
+                    </div>
+                   
+                    <div class="input">
+                        <label for="email">E-mail</label>
+                        <input type="text" name="email" id="email" placeholder="Digite seu email" required pattern=".*@.{5,29}" title="(Digite um endereço de e-mail válido Ex: exemplo@gmail.com)">
+                    </div>
+                    <div class="input">
+                        <label for="datanascimento">Data nascimento</label>
+                        <input type="date" name="data_nascimento" id="datanascimento" required>
+                    </div>
+                    <div class="input">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="Ex:(xx) xxxxx-xxxx" pattern="[0-9]{10,}" title="Numero de telefone Invalido" required>
+                        </div>
+                    <div class="input">
+                        <label for="endereco">Endereço</label>
+                        <input type="text" name="endereco" id="Endereço" placeholder="Ex: Rua:155 Numero:25..." required title="Preencha os campos corretamente" pattern="[0-9A-Za-záàâãéèêíóôõúç,\s]{7,50}">
+                    </div>
+        
+                    <div class="input" id="genero">
+                        <label for="sexo">Sexo</label>
+                        <input type="radio" name="sexo" id="sexo" value="Masculino" required><span id="masc">Masculino</span>
+                        <input type="radio" name="sexo" id="sexo" value="Feminino" required><span id="fem">Feminino</span>
+                    </div>
+    
+                    <div class="botao">
+                        <button type="submit" oneclick>Enviar</button>
+                    </div>
+                </section>  
+
+            </form>
+        </div>
+    </main>
+    <footer>&copy; Criado por Jonathan 2023</footer>
+    <script src="JavaScript\script.js"></script>
+
+    <script>SublinharNav()</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progamação Web - FormAbout</title>
+    <link rel="stylesheet" href="CSS/stylos.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,600;1,100&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header-index">
+        <div class="titulo-nav">
+            <a href="index.html">MinhaWeb.com</a>
+        </div>
+
+        <nav class="menu-index">
+            <div class="icones-nav">
+                <a class="home-nav" href="index.html">Home</a>
+                <a class="form-nav" href="form.html">Formulário</a>
+                <a class="about-nav" href="about.html">Sobre</a>
+            </div> 
+        </nav>
+    </header>
+
+    <div class="container-aboutform">
+        <h3 id="titulo-aboutform">Dados Recebidos do Formulário</h3>
+        
+        <table class="tabelaCSS">   
+            <tr><th>ID</th><th>Dados</th></tr>
+            
+            <script>
+                // Função para obter parâmetros da URL
+                function getParameters() {
+                    var paramsRet = {};
+                    var url = window.location.href;
+                    var paramsStart = url.indexOf("?");
+
+                    if (paramsStart != -1) {
+                        var paramString = url.substring(paramsStart + 1);
+                        paramString = decodeURIComponent(paramString);
+                        var params = paramString.split("&");
+                        for (var i = 0; i < params.length; i++) {
+                            var pairArray = params[i].split("=");
+                            if (pairArray.length == 2) {
+                                paramsRet[pairArray[0]] = pairArray[1];
+                            }
+                        }
+                    }
+                    return paramsRet;
+                }
+
+                // Chama a função e exibe os dados
+                var params = getParameters();
+                for (let [key, value] of Object.entries(params)) {
+                    document.write("<tr><td style='text-align: center;'><b>" + key + "</b></td><td>" + value + "</td></tr>");
+                }
+            </script>
+            
+            <tr><th colspan="2">
+                <input type="button" value="<< Retornar" onclick="window.location.href='form.html'">
+            </th></tr>
+        </table>
+    </div>
+
+    <script src="JavaScript/script.js"></script>
+
+    <script>SublinharNav()</script>
+</body>
+</html>
