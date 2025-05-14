@@ -1,0 +1,19 @@
+{% extends 'paginas/base.html' %}
+
+
+
+{% block body %}
+
+    <div class="container">
+    <h1>Usuarios</h1>
+
+
+    {% for nome in lista%}
+        <p>{{ nome }}</p>
+        <hr>
+
+    {% endfor %}
+
+    </div>
+
+{% endblock %}
