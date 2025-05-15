@@ -4,12 +4,6 @@
 
 {% block body %}
 
-    <div class="container">
-    <h2>Login</h2>
-
-    {{ form_login.email }}<br><br>
-    {{ form_login.password }}
-
-    </div>
+    {% include 'Components/formLogin.html' %}
 
 {% endblock %}
