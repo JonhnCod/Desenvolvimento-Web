@@ -1,0 +1,30 @@
+# Ambiente virtual
+.venv/
+venv/
+env/
+
+# PyCharm
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+
+# Arquivos de ambiente
+.env
+*.env
+
+# Arquivos de banco de dados locais
+*.sqlite3
+*.db
+
+# Sistema
+.DS_Store
+Thumbs.db
