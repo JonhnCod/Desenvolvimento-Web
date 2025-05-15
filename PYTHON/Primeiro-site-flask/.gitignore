@@ -21,10 +21,6 @@ __pycache__/
 .env
 *.env
 
-# Arquivos de banco de dados locais
-*.sqlite3
-*.db
-
 # Sistema
 .DS_Store
 Thumbs.db
