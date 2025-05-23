@@ -1,10 +1,3 @@
-Gostaria de um README para o projeto Flask que você me mostrou anteriormente (o "Primeiro-site-flask") ou para o repositório completo que contém tanto o Flask quanto o React?
-
-Com base na sua última solicitação de análise do código Flask, vou gerar um README focado no projeto Flask. Se precisar de um README para o repositório completo, por favor, me avise\!
-
-Aqui está uma sugestão de README para o seu projeto Flask:
-
------
 
 # Flask Impressionador
 
