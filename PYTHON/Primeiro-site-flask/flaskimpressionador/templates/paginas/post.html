@@ -4,8 +4,6 @@
 
 {% block body %}
     <div class="container mt-3">
-
-
             <div class="row border mt-4 p-3 meupost d-flex align-items-start flex-nowrap" style="gap: 1rem;">
                 <div style="flex: 0 0 200px;">
                     <img src="{{ url_for('static', filename='imageprofile/' + post.autor_post.foto_perfil) }}"
@@ -19,53 +17,87 @@
                 </div>
 
                 <div style="flex: 1;">
-                    <h5>{{ post.titulo }}</h5>
+                    <h5>
+                        {{ post.titulo }}
+                        <small class="text-muted" style="font-size: 13px">
+                            - Criado em -
+                            {{ post.data_criacao.strftime('%d/%m/%Y')}}
+                            {% if form %}
+                                - <a href="#form_editarpost"> editar post</a> /
+                                 <a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#excluir-post"> excluir
+                                </a>
+                            {% endif %}
+                        </small>
+                    </h5>
                     <p>{{ post.corpo }}</p>
                 </div>
             </div>
 
     </div>
-{% if form %}
-    
-    <div class="container mb-5 p-5">
-    <div class="row ">
-        <div class="col ">
-            <form method="POST" action="" class="border p-5" >
-                {{ form.csrf_token }}
-                <legend>Editar Post</legend>
-                <fieldset>
-                    <div class="form-group">
-                        {{ form.titulo.label(class="form-control-label")}}
-                        {% if form.titulo.errors %}
-                            {{ form.titulo(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form.titulo.errors %}
-                                    {{ erro }}
-                                {% endfor %}
+    {% if form %}
+        <div class="container mb-5 p-5">
+            <div class="row ">
+                <div class="col ">
+                    <form method="POST" action="" id="form_editarpost" class="border p-5" >
+                        {{ form.csrf_token }}
+                        <legend>Editar Post</legend>
+                        <fieldset>
+                            <div class="form-group">
+                                {{ form.titulo.label(class="form-control-label")}}
+                                {% if form.titulo.errors %}
+                                    {{ form.titulo(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form.titulo.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.titulo(class="form-control") }}
+                                {% endif %}
                             </div>
-                        {% else %}
-                            {{ form.titulo(class="form-control") }}
-                        {% endif %}
-                    </div>
-                    <div class="form-group">
-                        {{ form.corpo.label(class="form-control-label")}}
-                        {% if form.corpo.errors %}
-                            {{ form.corpo(class="form-control is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for erro in form.corpo.errors %}
-                                    {{ erro }}
-                                {% endfor %}
+                            <div class="form-group">
+                                {{ form.corpo.label(class="form-control-label")}}
+                                {% if form.corpo.errors %}
+                                    {{ form.corpo(class="form-control is-invalid") }}
+                                    <div class="invalid-feedback">
+                                        {% for erro in form.corpo.errors %}
+                                            {{ erro }}
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {{ form.corpo(class="form-control") }}
+                                {% endif %}
                             </div>
-                        {% else %}
-                            {{ form.corpo(class="form-control") }}
-                        {% endif %}
-                    </div>
-                </fieldset>
-                {{ form.enviar_post(class="btn btn-primary mt-3") }}
-            </form>
+                        </fieldset>
+                        {{ form.enviar_post(class="btn btn-primary mt-3") }}
+                    </form>
+                </div>
+            </div>
         </div>
+
+    {% endif %}
+
+
+    <!-- Modal -->
+<div class="modal fade" id="excluir-post" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Excluir post</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Tem certeza que deseja excluir ? não é possível reverte essa ação!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <form method="post" action="{{ url_for('excluir_post',post_id=post.id )}}">
+              <button type="submit" class="btn btn-danger">Excluir</button>
+          </form>
+
+      </div>
     </div>
+  </div>
 </div>
 
-{% endif %}
 {% endblock %}

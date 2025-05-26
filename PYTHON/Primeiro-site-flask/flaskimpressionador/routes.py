@@ -1,4 +1,6 @@
-from flask import render_template,flash,redirect,url_for,request
+from os import abort
+
+from flask import render_template,flash,redirect,url_for,request,abort
 from flaskimpressionador import app, database,bcrypt
 from flaskimpressionador.forms import LoginForm, RegisterForm, FormEditprofile, FormPost
 from flaskimpressionador.models import Usuario, Post
@@ -145,6 +147,22 @@ def exibir_post(post_id):
         form = None
 
     return render_template('paginas/post.html', post=post, form=form)
+
+
+# ---------------------------------- PÁGINA EXCLUIR POST ------------------------------------------
+@app.route('/post/<post_id>/excluir',methods=['GET','POST'])
+@login_required
+def excluir_post(post_id):
+    post = Post.query.get(post_id)
+    if current_user == post.autor_post:
+        database.session.delete(post)
+        database.session.commit()
+        flash('post excluido com sucesso', 'alert-danger')
+        return redirect(url_for('home'))
+    else:
+        abort(403)
+
+
 
 
 # ------------- Funções -----------------------------
