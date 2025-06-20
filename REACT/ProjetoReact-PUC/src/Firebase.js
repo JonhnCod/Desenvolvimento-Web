@@ -3,7 +3,7 @@ import 'firebase/firestore';
 import 'firebase/auth'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyALolyW5bDhFa-wZMW0vvF05RHiqpoF-Zc",
+    apiKey: "",
     authDomain: "somativa-final-1a334.firebaseapp.com",
     projectId: "somativa-final-1a334",
     storageBucket: "somativa-final-1a334.firebasestorage.app",
