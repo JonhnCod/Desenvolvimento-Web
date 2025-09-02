@@ -1,33 +1,92 @@
+import asyncio
 import aiohttp
+from deep_translator import GoogleTranslator
+
+tradutor = GoogleTranslator(source='auto',target='pt')
 
 class PokemonControl():
 
-    pokemon = []
+    pokemons = []
+    pokemon = {}
 
-    @staticmethod
-    async def getTodos():
-        url = f"https://pokeapi.co/api/v2/pokemon?offset=0&limit=1300"
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url) as resp:
-                if resp.status == 200:
-                    dados =  await resp.json()
-                    for i,pokemon in enumerate(dados['results']):
-                        nome = pokemon['name']
 
-                        if i > 1025:
-                            i += 8975
-                        foto = f"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/{i}.png"
-                        if session.get(foto).status_code != 200:
-                            foto = None
+async def getPokemons(session):
+    url = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0'
+    async with session.get(url) as res:
+        dados = await res.json()
+        return dados['results']
 
-                        pokem ={
-                            'nome':nome,
-                            'img': foto
 
-                        }
-                    
-                    PokemonControl.pokemon.append(pokem)
-            return None
+async def getDetalhes(session,url):
+    async with session.get(url) as res:
+        dados = await res.json()
+        pokemon = {
+            'id': dados['id'],
+            'nome': dados['name'],
+            'foto': dados['sprites']["other"]["official-artwork"]["front_default"],
+            'descricao': dados['species']['url']
+        }
+        PokemonControl.pokemons.append(pokemon)
+
+async def getdadosSpecies(session, url, posicao):
+    async with session.get(url) as res:
+        dados = await res.json()
+        for i in dados["flavor_text_entries"]:
+            if i['language']['name'] == 'en':
+                descricao = i['flavor_text']
+                break
+        PokemonControl.pokemons[posicao]['descricao'] = descricao
+
+
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+
+        task1 = await getPokemons(session)
+
+        tasks2 = []
+        for pokemon in task1:
+            tasks2.append(asyncio.create_task(getDetalhes(session,pokemon['url'])))
+
+        await asyncio.gather(*tasks2)
+
+        tasks3 = []
+        for i,poke in enumerate(PokemonControl.pokemons):
+            tasks3.append(getdadosSpecies(session,poke['descricao'],i))
+        
+        await asyncio.gather(*tasks3)
+
+        
+
+
+    if PokemonControl.pokemons:
+        PokemonControl.pokemons = sorted(PokemonControl.pokemons, key=lambda p: p['id'])
+        
+        
+            
+        
+
+
+
+    
+
+
+        
+
+
+
+
+
+
+  
+
+    
+
+    
+
+
+
+
         
 
    

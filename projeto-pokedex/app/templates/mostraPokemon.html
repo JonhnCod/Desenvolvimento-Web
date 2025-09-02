@@ -7,7 +7,7 @@
     <div class="container d-flex flex-wrap justify-content-around">
     {% for i in lista %}
         <div class="card mb-3" style="width: 19rem; height: 30rem;">
-            <img class="card-img-top mt-2" src="{{ i['img'] if i['img'] else url_for('static', filename='pokebola.png')}}" 
+            <img class="card-img-top mt-2" src="{{ i['foto'] if i['foto'] else url_for('static', filename='pokebola.png')}}" 
                  alt="Imagem de capa do card" height="200">
             <div class="card-body d-flex flex-column justify-content-between">
                 <h5 class="card-title d-flex justify-content-center">{{ i['nome'] }}</h5>
