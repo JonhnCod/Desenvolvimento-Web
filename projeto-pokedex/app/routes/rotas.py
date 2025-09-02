@@ -1,8 +1,8 @@
 from flask import render_template
 from app import app
 from app.controllers.pokeControl import main, PokemonControl as pk
-import asyncio
 from deep_translator import GoogleTranslator
+import asyncio
 
 tradutor = GoogleTranslator(source='auto', target='pt')
 
@@ -10,8 +10,7 @@ tradutor = GoogleTranslator(source='auto', target='pt')
 @app.route("/")
 def home():
 
-    asyncio.run(main())
-    
+    asyncio.run(main()) 
     
     return render_template(
         "home.html"
